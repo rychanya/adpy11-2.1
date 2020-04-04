@@ -3,6 +3,7 @@ import app
 from unittest import TestCase
 from unittest.mock import patch
 
+
 class TestApp(TestCase):
 
     def setUp(self):
@@ -27,13 +28,12 @@ class TestApp(TestCase):
     def test_get_doc_owner_name(self):
         with patch('app.input', return_value='11-2'):
             self.assertEqual(app.get_doc_owner_name(), 'Геннадий Покемонов')
-        
+
         with patch('app.input', return_value='not exs'):
             self.assertIsNone(app.get_doc_owner_name())
 
     def test_get_all_doc_owners_names(self):
         self.assertEqual(app.get_all_doc_owners_names(), set([doc['name'] for doc in self.docs]))
-
 
     def test_remove_doc_from_shelf(self):
         self.assertIn('11-2', app.directories['1'])
@@ -43,7 +43,7 @@ class TestApp(TestCase):
 
         app.remove_doc_from_shelf('11-2')
         self.assertNotIn('11-2', app.directories['1'])
-        
+
     def test_add_new_shelf(self):
         shelf_before = list(app.directories.keys())
         self.assertTrue(shelf_before)
